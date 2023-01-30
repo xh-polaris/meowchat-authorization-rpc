@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package authentication;
+
+option go_package = './pb';
+
+message AllowReq {
+  string userId = 1;
+  string objectId = 2;
+  string object = 3;
+  string action = 4;
+}
+
+message AllowResp {
+  bool allow = 1;
+}
+
+service authorization {
+  rpc allow(AllowReq) returns (AllowResp);
+}

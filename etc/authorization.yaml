@@ -1,0 +1,21 @@
+Name: authentication.rpc
+ListenOn: 0.0.0.0:8080
+Mode: dev
+Log:
+  Encoding: plain
+  Level: debug
+CollectionRPC:
+  Endpoints:
+    - $COLLECTION_RPC_HOST
+MomentRPC:
+  Endpoints:
+    - $MOMENT_RPC_HOST
+SystemRPC:
+  Endpoints:
+    - $NOTICE_RPC_HOST
+CommentRPC:
+  Endpoints:
+    - $COMMENT_RPC_HOST
+PostRPC:
+  Endpoints:
+    - $POST_RPC_HOST

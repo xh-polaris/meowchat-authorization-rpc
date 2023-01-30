@@ -1,0 +1,11 @@
+# Meowchat-authentication-rpc
+
+## Get started
+
+**Start services**
+
+```bash
+go run authentication.go -f etc/authorization.yaml
+```
+
+Before starting the server, please replace the default config file in `etc` directory.
