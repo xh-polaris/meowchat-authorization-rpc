@@ -35,7 +35,7 @@ func NewAuthorizationClient(cc grpc.ClientConnInterface) AuthorizationClient {
 
 func (c *authorizationClient) Allow(ctx context.Context, in *AllowReq, opts ...grpc.CallOption) (*AllowResp, error) {
 	out := new(AllowResp)
-	err := c.cc.Invoke(ctx, "/authentication.authorization/allow", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/authorization.authorization/allow", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _Authorization_Allow_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/authentication.authorization/allow",
+		FullMethod: "/authorization.authorization/allow",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthorizationServer).Allow(ctx, req.(*AllowReq))
@@ -92,7 +92,7 @@ func _Authorization_Allow_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Authorization_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "authentication.authorization",
+	ServiceName: "authorization.authorization",
 	HandlerType: (*AuthorizationServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
