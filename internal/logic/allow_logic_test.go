@@ -46,6 +46,21 @@ func TestAllowLogic_Allow_Community(t *testing.T) {
 		So(allow.Allow, ShouldBeTrue)
 	})
 
+	Convey("不允许普通用户写", t, func() {
+		mockSystemRpc.EXPECT().RetrieveUserRole(Any(), Any(), Any()).Return(&pb.RetrieveUserRoleResp{
+			Roles: []*pb.Role{
+				{
+					Type: RoleUser,
+				},
+			},
+		}, nil)
+		allow, _ := l.Allow(&pb2.AllowReq{
+			Object: ObjectCommunity,
+			Action: ActionWrite,
+		})
+		So(allow.Allow, ShouldBeFalse)
+	})
+
 	Convey("允许超级管理员", t, func() {
 		mockSystemRpc.EXPECT().RetrieveUserRole(Any(), Any(), Any()).Return(&pb.RetrieveUserRoleResp{
 			Roles: []*pb.Role{
@@ -155,7 +170,6 @@ func TestAllowLogic_Allow_Community(t *testing.T) {
 		})
 		So(allow.Allow, ShouldBeTrue)
 	})
-
 }
 
 func TestAllowLogic_Allow_Notice(t *testing.T) {
@@ -184,6 +198,21 @@ func TestAllowLogic_Allow_Notice(t *testing.T) {
 			Action: ActionRead,
 		})
 		So(allow.Allow, ShouldBeTrue)
+	})
+
+	Convey("不允许普通用户写", t, func() {
+		mockSystemRpc.EXPECT().RetrieveUserRole(Any(), Any(), Any()).Return(&pb.RetrieveUserRoleResp{
+			Roles: []*pb.Role{
+				{
+					Type: RoleUser,
+				},
+			},
+		}, nil)
+		allow, _ := l.Allow(&pb2.AllowReq{
+			Object: ObjectCommunity,
+			Action: ActionWrite,
+		})
+		So(allow.Allow, ShouldBeFalse)
 	})
 
 	Convey("允许超级管理员", t, func() {
@@ -350,6 +379,23 @@ func TestAllowLogic_Allow_Post(t *testing.T) {
 		So(allow.Allow, ShouldBeTrue)
 	})
 
+	Convey("不允许非创建人的普通用户写", t, func() {
+		mockPostRpc.EXPECT().RetrievePost(Any(), Any()).Return(&pb3.RetrievePostResp{
+			Post: &pb3.Post{
+				Id:     "PostId",
+				UserId: "AnotherPostUserId2",
+			},
+		}, nil)
+		mockSystemRpc.EXPECT().RetrieveUserRole(Any(), Any()).Return(&pb.RetrieveUserRoleResp{}, nil)
+		allow, _ := l.Allow(&pb2.AllowReq{
+			UserId:   "PoserUserId",
+			Object:   ObjectPost,
+			ObjectId: "NoticeId",
+			Action:   ActionWrite,
+		})
+		So(allow.Allow, ShouldBeFalse)
+	})
+
 	Convey("允许超级管理员", t, func() {
 		mockSystemRpc.EXPECT().RetrieveUserRole(Any(), Any(), Any()).Return(&pb.RetrieveUserRoleResp{
 			Roles: []*pb.Role{
@@ -382,23 +428,6 @@ func TestAllowLogic_Allow_Post(t *testing.T) {
 		So(allow.Allow, ShouldBeTrue)
 	})
 
-	Convey("帖子发布者ID不符", t, func() {
-		mockPostRpc.EXPECT().RetrievePost(Any(), Any()).Return(&pb3.RetrievePostResp{
-			Post: &pb3.Post{
-				Id:     "PostId",
-				UserId: "AnotherPostUserId2",
-			},
-		}, nil)
-		mockSystemRpc.EXPECT().RetrieveUserRole(Any(), Any()).Return(&pb.RetrieveUserRoleResp{}, nil)
-		allow, _ := l.Allow(&pb2.AllowReq{
-			UserId:   "PoserUserId",
-			Object:   ObjectPost,
-			ObjectId: "NoticeId",
-			Action:   ActionWrite,
-		})
-		So(allow.Allow, ShouldBeFalse)
-	})
-
 }
 
 func TestAllowLogic_Allow_Comment(t *testing.T) {
@@ -427,6 +456,23 @@ func TestAllowLogic_Allow_Comment(t *testing.T) {
 			Action: ActionRead,
 		})
 		So(allow.Allow, ShouldBeTrue)
+	})
+
+	Convey("不允许非创建人的普通用户写", t, func() {
+		mockCommentRpc.EXPECT().RetrieveCommentById(Any(), Any()).Return(&pb4.RetrieveCommentByIdResponse{
+			Comment: &pb4.Comment{
+				Id:       "CommentId",
+				AuthorId: "Another2CommentAuthorId",
+			},
+		}, nil)
+		mockSystemRpc.EXPECT().RetrieveUserRole(Any(), Any()).Return(&pb.RetrieveUserRoleResp{}, nil)
+		allow, _ := l.Allow(&pb2.AllowReq{
+			UserId:   "CommentAuthorId",
+			Object:   ObjectComment,
+			ObjectId: "CommentId",
+			Action:   ActionWrite,
+		})
+		So(allow.Allow, ShouldBeFalse)
 	})
 
 	Convey("允许超级管理员", t, func() {
@@ -459,23 +505,6 @@ func TestAllowLogic_Allow_Comment(t *testing.T) {
 			Action:   ActionWrite,
 		})
 		So(allow.Allow, ShouldBeTrue)
-	})
-
-	Convey("评论发布者ID不符", t, func() {
-		mockCommentRpc.EXPECT().RetrieveCommentById(Any(), Any()).Return(&pb4.RetrieveCommentByIdResponse{
-			Comment: &pb4.Comment{
-				Id:       "CommentId",
-				AuthorId: "Another2CommentAuthorId",
-			},
-		}, nil)
-		mockSystemRpc.EXPECT().RetrieveUserRole(Any(), Any()).Return(&pb.RetrieveUserRoleResp{}, nil)
-		allow, _ := l.Allow(&pb2.AllowReq{
-			UserId:   "CommentAuthorId",
-			Object:   ObjectComment,
-			ObjectId: "CommentId",
-			Action:   ActionWrite,
-		})
-		So(allow.Allow, ShouldBeFalse)
 	})
 
 	Convey("帖子发布者操作评论", t, func() {

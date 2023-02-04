@@ -125,9 +125,9 @@ func (l *AllowLogic) allowComment(in *pb.AllowReq) bool {
 		Action:   in.Action,
 	}
 	switch c.Comment.Type {
-	case "moment":
+	case ObjectMoment:
 		return l.allowMoment(allowParentReq)
-	case "post":
+	case ObjectPost:
 		return l.allowPost(allowParentReq)
 	}
 

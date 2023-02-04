@@ -32,8 +32,8 @@ func (l *AllowLogic) subCommunityOf(cid1, cid2 string) bool {
 
 // 判断userId对应用户是否是超级管理员或是某个社区的管理员
 func (l *AllowLogic) allowCommunityOrSuperAdmin(userId, communityId string) bool {
-	userRole, _ := l.svcCtx.SystemRPC.RetrieveUserRole(l.ctx, &system.RetrieveUserRoleReq{UserId: userId})
-	if userRole == nil || userRole.Roles == nil {
+	userRole, err := l.svcCtx.SystemRPC.RetrieveUserRole(l.ctx, &system.RetrieveUserRoleReq{UserId: userId})
+	if err != nil || userRole == nil || userRole.Roles == nil {
 		return false
 	}
 
