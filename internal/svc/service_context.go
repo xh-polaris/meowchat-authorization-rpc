@@ -1,13 +1,13 @@
 package svc
 
 import (
+	"github.com/xh-polaris/meowchat-authorization-rpc/internal/config"
 	"github.com/xh-polaris/meowchat-collection-rpc/collectionrpc"
 	"github.com/xh-polaris/meowchat-comment-rpc/commentrpc"
 	"github.com/xh-polaris/meowchat-moment-rpc/momentrpc"
 	"github.com/xh-polaris/meowchat-post-rpc/postrpc"
 	"github.com/xh-polaris/meowchat-system-rpc/systemrpc"
 	"github.com/zeromicro/go-zero/zrpc"
-	"meowchat-authorization-rpc/internal/config"
 )
 
 type ServiceContext struct {

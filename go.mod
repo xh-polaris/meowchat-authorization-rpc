@@ -1,4 +1,4 @@
-module meowchat-authorization-rpc
+module github.com/xh-polaris/meowchat-authorization-rpc
 
 go 1.18
 

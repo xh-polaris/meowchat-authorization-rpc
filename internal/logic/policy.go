@@ -1,14 +1,14 @@
 package logic
 
 import (
+	. "github.com/xh-polaris/meowchat-authorization-rpc/constant"
+	"github.com/xh-polaris/meowchat-authorization-rpc/pb"
 	cat "github.com/xh-polaris/meowchat-collection-rpc/pb"
 	comment "github.com/xh-polaris/meowchat-comment-rpc/pb"
 	moment "github.com/xh-polaris/meowchat-moment-rpc/pb"
 	post "github.com/xh-polaris/meowchat-post-rpc/pb"
 	. "github.com/xh-polaris/meowchat-system-rpc/constant"
 	system "github.com/xh-polaris/meowchat-system-rpc/pb"
-	. "meowchat-authorization-rpc/constant"
-	"meowchat-authorization-rpc/pb"
 )
 
 // 社区权限

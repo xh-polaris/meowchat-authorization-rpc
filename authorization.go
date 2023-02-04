@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"meowchat-authorization-rpc/internal/config"
-	"meowchat-authorization-rpc/internal/server"
-	"meowchat-authorization-rpc/internal/svc"
-	"meowchat-authorization-rpc/pb"
+	"github.com/xh-polaris/meowchat-authorization-rpc/internal/config"
+	"github.com/xh-polaris/meowchat-authorization-rpc/internal/server"
+	"github.com/xh-polaris/meowchat-authorization-rpc/internal/svc"
+	"github.com/xh-polaris/meowchat-authorization-rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

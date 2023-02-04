@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"meowchat-authorization-rpc/internal/logic"
-	"meowchat-authorization-rpc/internal/svc"
-	"meowchat-authorization-rpc/pb"
+	"github.com/xh-polaris/meowchat-authorization-rpc/internal/logic"
+	"github.com/xh-polaris/meowchat-authorization-rpc/internal/svc"
+	"github.com/xh-polaris/meowchat-authorization-rpc/pb"
 )
 
 type AuthorizationServer struct {

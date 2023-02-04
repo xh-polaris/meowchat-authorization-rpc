@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	. "meowchat-authorization-rpc/constant"
-
-	"meowchat-authorization-rpc/internal/svc"
-	"meowchat-authorization-rpc/pb"
+	. "github.com/xh-polaris/meowchat-authorization-rpc/constant"
+	"github.com/xh-polaris/meowchat-authorization-rpc/internal/svc"
+	"github.com/xh-polaris/meowchat-authorization-rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

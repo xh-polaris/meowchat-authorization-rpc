@@ -6,7 +6,7 @@ package authorization
 import (
 	"context"
 
-	"meowchat-authorization-rpc/pb"
+	"github.com/xh-polaris/meowchat-authorization-rpc/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
