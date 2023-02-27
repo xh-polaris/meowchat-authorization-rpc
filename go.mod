@@ -7,7 +7,7 @@ require (
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/xh-polaris/meowchat-collection-rpc v1.0.6
 	github.com/xh-polaris/meowchat-comment-rpc v1.0.2
-	github.com/xh-polaris/meowchat-moment-rpc v1.0.9
+	github.com/xh-polaris/meowchat-moment-rpc v1.1.3
 	github.com/xh-polaris/meowchat-post-rpc v1.0.5
 	github.com/xh-polaris/meowchat-system-rpc v1.2.0
 	github.com/zeromicro/go-zero v1.4.4
